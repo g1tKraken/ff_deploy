@@ -37,9 +37,6 @@
     <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js" data-dojo-config="parseOnLoad: true, isDebug: true"></script>
     <!-- script src="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/dojo.js') }}" data-dojo-config="parseOnLoad: true, isDebug: true"></script -->
     <script>
-        require(["dojo/parser", "dojo/json", "dijit/form/TextBox"]);
-    </script>
-    <script>
         var citiesJN = [];
         var statesJN =[];
 
@@ -243,9 +240,7 @@
                 </li>
                 <div class="form-group">
                     <label for="where"> </label>
-                    <input type="text" class="form-control form-control-lg"  id="FormControlInput2"
-                    data-dojo-type="dijit/form/TextBox"
-                    data-dojo-props="trim:true, propercase:true" placeholder="Destination?"/>
+                    <input type="text" class="form-control form-control-lg"  id="FormControlInput2" placeholder="Destination?"/>
                   </div>
                 <li>
                     <a href="#">Start Over</a> <!-- This clears filter --> 
