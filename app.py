@@ -33,13 +33,15 @@ if 'IS_HEROKU' in os.environ:
 # Import your config file(s) and variable(s)
 if is_heroku == False:
     from config import michelin_key, google_key, zomato_key, yelp_key, CONN
+    data = {'gapi': google_key}
 else:
     google_api_key = os.environ.get('google_key')
     michelin_api_key = os.environ.get('michelin_key')
     yelp_api_key = os.environ.get('yelp_key')
     zomato_api_key = os.environ.get('zomato_key')
     CONN = os.environ.get('CONN')
-
+    data = {'gapi': google_api_key}
+    
 ## These need to be uncommented to enable the proxy in Heroku
 os.environ['http_proxy'] = os.environ.get('FIXIE_URL', '')
 os.environ['https_proxy'] = os.environ.get('FIXIE_URL', '')
@@ -55,7 +57,7 @@ app = Flask(__name__)
            
 @app.route("/")
 def home():
-    return render_template('index.html')
+    return render_template('index.html', data=data)
 
 
 #@app.route("/cdb")
