@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/../dijit/themes/claro/claro.css') }}">
+	
+	<script>dojoConfig = {async: true, parseOnLoad: true}</script>
+    <!-- script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js" data-dojo-config="parseOnLoad: true, isDebug: true"></script -->
+    <script src="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/dojo.js') }}" data-dojo-config="parseOnLoad: true, isDebug: true"></script>
+	
+	<script>
+        require([
+            "dojo/json", "dojo/store/Memory",
+            "dijit/form/ComboBox", "dijit/form/FilteringSelect",
+            "dojo/text!{{ url_for('static', filename='js/small_geonames_pop-places.json') }}",
+            "dojo/text!{{ url_for('static', filename='js/states.json') }}",
+            "dojo/domReady!"
+        ], function(json ,Memory, ComboBox, FilteringSelect, locs, states){
+
+            var citiesJN = json.parse(locs);
+            var statesJN = json.parse(states);
+
+            new dijit.form.ComboBox({
+                id: "city",
+                store: new Memory({ data: citiesJN }),
+                autoComplete: true,
+                query: {state: /.*/},
+                style: "width: 150px;",
+                required: true,
+                searchAttr: "FEATURE_NAME",
+                onChange: function(cityobj){
+                    console.log("combobox onchange ", cityobj, this.item);
+                    dijit.byId('state').set('value', this.item ? this.item.STATE_ALPHA : null);
+                }
+            }, "city").startup();
+
+            new dijit.form.FilteringSelect({
+                id: "state",
+                store: new Memory({ idProperty: "STATE_ALPHA", data: statesJN }),
+                autoComplete: true,
+                style: "width: 150px;",
+                onChange: function(state){
+                    console.log("FilteringSelect onchange ", state, this.item);
+                    dijit.byId('city').query.STATE_ALPHA = this.item.STATE_ALPHA || /.*/;
+                }
+            }, "state").startup();
+        });
+	</script>
+</head>
+<body class="claro">
+    <label for="city">City:</label>
+<input id="city" />
+<label for="state">State:</label>
+<input id="state" />
+</body>
+</html>

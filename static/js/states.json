@@ -1,0 +1,234 @@
+[
+    {
+        "name": "Alabama",
+        "STATE_ALPHA": "AL"
+    },
+    {
+        "name": "Alaska",
+        "STATE_ALPHA": "AK"
+    },
+    {
+        "name": "American Samoa",
+        "STATE_ALPHA": "AS"
+    },
+    {
+        "name": "Arizona",
+        "STATE_ALPHA": "AZ"
+    },
+    {
+        "name": "Arkansas",
+        "STATE_ALPHA": "AR"
+    },
+    {
+        "name": "California",
+        "STATE_ALPHA": "CA"
+    },
+    {
+        "name": "Colorado",
+        "STATE_ALPHA": "CO"
+    },
+    {
+        "name": "Connecticut",
+        "STATE_ALPHA": "CT"
+    },
+    {
+        "name": "Delaware",
+        "STATE_ALPHA": "DE"
+    },
+    {
+        "name": "District of Columbia",
+        "STATE_ALPHA": "DC"
+    },
+    {
+        "name": "Federated States of Micronesia",
+        "STATE_ALPHA": "FM"
+    },
+    {
+        "name": "Florida",
+        "STATE_ALPHA": "FL"
+    },
+    {
+        "name": "Georgia",
+        "STATE_ALPHA": "GA"
+    },
+    {
+        "name": "Guam",
+        "STATE_ALPHA": "GU"
+    },
+    {
+        "name": "Hawaii",
+        "STATE_ALPHA": "HI"
+    },
+    {
+        "name": "Idaho",
+        "STATE_ALPHA": "ID"
+    },
+    {
+        "name": "Illinois",
+        "STATE_ALPHA": "IL"
+    },
+    {
+        "name": "Indiana",
+        "STATE_ALPHA": "IN"
+    },
+    {
+        "name": "Iowa",
+        "STATE_ALPHA": "IA"
+    },
+    {
+        "name": "Kansas",
+        "STATE_ALPHA": "KS"
+    },
+    {
+        "name": "Kentucky",
+        "STATE_ALPHA": "KY"
+    },
+    {
+        "name": "Louisiana",
+        "STATE_ALPHA": "LA"
+    },
+    {
+        "name": "Maine",
+        "STATE_ALPHA": "ME"
+    },
+    {
+        "name": "Marshall Islands",
+        "STATE_ALPHA": "MH"
+    },
+    {
+        "name": "Maryland",
+        "STATE_ALPHA": "MD"
+    },
+    {
+        "name": "Massachusetts",
+        "STATE_ALPHA": "MA"
+    },
+    {
+        "name": "Michigan",
+        "STATE_ALPHA": "MI"
+    },
+    {
+        "name": "Minnesota",
+        "STATE_ALPHA": "MN"
+    },
+    {
+        "name": "Mississippi",
+        "STATE_ALPHA": "MS"
+    },
+    {
+        "name": "Missouri",
+        "STATE_ALPHA": "MO"
+    },
+    {
+        "name": "Montana",
+        "STATE_ALPHA": "MT"
+    },
+    {
+        "name": "Nebraska",
+        "STATE_ALPHA": "NE"
+    },
+    {
+        "name": "Nevada",
+        "STATE_ALPHA": "NV"
+    },
+    {
+        "name": "New Hampshire",
+        "STATE_ALPHA": "NH"
+    },
+    {
+        "name": "New Jersey",
+        "STATE_ALPHA": "NJ"
+    },
+    {
+        "name": "New Mexico",
+        "STATE_ALPHA": "NM"
+    },
+    {
+        "name": "New York",
+        "STATE_ALPHA": "NY"
+    },
+    {
+        "name": "North Carolina",
+        "STATE_ALPHA": "NC"
+    },
+    {
+        "name": "North Dakota",
+        "STATE_ALPHA": "ND"
+    },
+    {
+        "name": "Northern Mariana Islands",
+        "STATE_ALPHA": "MP"
+    },
+    {
+        "name": "Ohio",
+        "STATE_ALPHA": "OH"
+    },
+    {
+        "name": "Oklahoma",
+        "STATE_ALPHA": "OK"
+    },
+    {
+        "name": "Oregon",
+        "STATE_ALPHA": "OR"
+    },
+    {
+        "name": "Pennsylvania",
+        "STATE_ALPHA": "PA"
+    },
+    {
+        "name": "Puerto Rico",
+        "STATE_ALPHA": "PR"
+    },
+    {
+        "name": "Rhode Island",
+        "STATE_ALPHA": "RI"
+    },
+    {
+        "name": "South Carolina",
+        "STATE_ALPHA": "SC"
+    },
+    {
+        "name": "South Dakota",
+        "STATE_ALPHA": "SD"
+    },
+    {
+        "name": "Tennessee",
+        "STATE_ALPHA": "TN"
+    },
+    {
+        "name": "Texas",
+        "STATE_ALPHA": "TX"
+    },
+    {
+        "name": "Utah",
+        "STATE_ALPHA": "UT"
+    },
+    {
+        "name": "Vermont",
+        "STATE_ALPHA": "VT"
+    },
+    {
+        "name": "Virgin Islands, U.S.",
+        "STATE_ALPHA": "VI"
+    },
+    {
+        "name": "Virginia",
+        "STATE_ALPHA": "VA"
+    },
+    {
+        "name": "Washington",
+        "STATE_ALPHA": "WA"
+    },
+    {
+        "name": "West Virginia",
+        "STATE_ALPHA": "WV"
+    },
+    {
+        "name": "Wisconsin",
+        "STATE_ALPHA": "WI"
+    },
+    {
+        "name": "Wyoming",
+        "STATE_ALPHA": "WY"
+    }
+]

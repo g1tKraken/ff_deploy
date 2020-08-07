@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html >
+<head>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/../dijit/themes/claro/claro.css') }}">
+	
+	<script>dojoConfig = {async: true, parseOnLoad: true}</script>
+    <!-- script src="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/dojo.js')}}"></script -->
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js"></script>
+<!-- <script>
+    require([
+        "dijit/Menu",
+        "dijit/MenuItem",
+        "dijit/CheckedMenuItem",
+        "dijit/MenuSeparator",
+        "dijit/PopupMenuItem",
+        "dojo/domReady!"
+    ], function(Menu, MenuItem, CheckedMenuItem, MenuSeparator, PopupMenuItem){
+        var pMenu;
+        pMenu = new Menu({
+            targetNodeIds: ["progmenu"]
+        });
+        pMenu.addChild(new MenuItem({
+            label: "Simple menu item"
+        }));
+        pMenu.addChild(new MenuItem({
+            label: "Disabled menu item",
+            disabled: true
+        }));
+        pMenu.addChild(new MenuItem({
+            label: "Menu Item With an icon",
+            iconClass: "dijitEditorIcon dijitEditorIconCut",
+            onClick: function(){alert('i was clicked')}
+        }));
+        pMenu.addChild(new CheckedMenuItem({
+            label: "checkable menu item"
+        }));
+        pMenu.addChild(new MenuSeparator());
+    
+        var pSubMenu = new Menu();
+        pSubMenu.addChild(new MenuItem({
+            label: "Submenu item"
+        }));
+        pSubMenu.addChild(new MenuItem({
+            label: "Submenu item"
+        }));
+        pMenu.addChild(new PopupMenuItem({
+            label: "Submenu",
+            popup: pSubMenu
+        }));
+    
+        pMenu.startup();
+    });
+        </script>
+    </head>
+    <body class="claro">
+        <span id="progmenu">Right click me to get a menu</span>
+    </body> -->
+
+    <body class="claro">
+        <div style="width:540px;">
+            <h1 style="text-align: center;">Programmatic Example</h1>
+            <div style="width:50%;float: left;">
+                <h1>dijit/form/Select</h1>
+                <label for="stateSelect">State:</label>
+                <div id="stateSelect"></div>
+                <br>
+                <hr>
+                <label for="locSelect">Place:</label>
+                <div id="locSelect"></div>
+            </div>
+            <div style="width:50%;float: right;"><h1>Values:</h1>
+                <div><strong>value:</strong> <span id="value"></span></div>
+                <div><strong>displayedValue:</strong> <span id="displayedValue"></span></div>
+                <h5>*Note how the submitted value will be the identity of the store item</h5>
+            </div>
+        </div>
+
+        <script>
+
+            require([
+                "dojo/json", "dojo/store/Memory",
+                "dijit/form/ComboBox", "dijit/form/FilteringSelect",
+                "dojo/text!{{ url_for('static', filename='js/small_geonames_pop-places.json') }}",
+                "dojo/text!{{ url_for('static', filename='js/states.json') }}",
+                "dojo/domReady!"
+            ], function(json ,Memory, ComboBox, FilteringSelect, locs, states){
+
+        // require(['dojo/json', "dojo/store/Memory", "dojo/text!{{ url_for('static', filename='js/small_geonames_pop-places.json') }}", "dijit/form/Select", "dojo/domReady!"], 
+        //                 function(json, Memory, Select)
+        //             {
+                        // var locStore = json.parse(locs);
+                        // console.log(locStore);
+
+            // require(["dijit/form/Select", "dojo/store/Memory",
+            //     "dojo/json", "dojo/text!./states.json", "dojo/domReady!"],
+            // function(Select, Memory, json, states){
+
+                //create store instance referencing data from states.json
+            //     var stateStore = new Memory({
+            //         idProperty: `FEATURE_ID`,
+            //         data: json.parse(locs)
+            //     });
+
+            //     // create Select widget, populating its options from the store
+            //     var select = new Select({
+            //         name: "stateSelect",
+            //         store: stateStore,
+            //         style: "width: 200px;",
+            //         labelAttr: "STATE_ALPHA",
+            //         maxHeight: -1, // tells _HasDropDown to fit menu within viewport
+            //         onChange: function(value){
+            //             document.getElementById("value").innerHTML = value;
+            //             document.getElementById("displayedValue").innerHTML = this.get("displayedValue");
+            //         }
+            //     }, "stateSelect");
+            //     select.startup();
+            // });
+            
+            var locJSON = json.parse(locs);
+            var stsJSON = json.parse(states);
+
+            new dijit.form.ComboBox({
+                id: "locSelect",
+                store: new Memory({ data: locJSON }),
+                autoComplete: true,
+                query: {stateSelect: /.*/},
+                style: "width: 150px;",
+                required: true,
+                searchAttr: "FEATURE_NAME",
+                onChange: function(locSelect){
+                    console.log("combobox onchange ", locSelect, this.item);
+                    dijit.byId('state').set('value', this.item ? this.item.state : null);
+                }
+            }, "locSelect").startup();
+
+            new dijit.form.FilteringSelect({
+                id: "stateSelect",
+                store: new Memory({ idProperty: "STATE_ALPHA", data: stsJSON }),
+                autoComplete: true,
+                style: "width: 150px;",
+                onChange: function(stateSelect){
+                    dijit.byId('locSelect').query.stateSelect = this.item.stateSelect || /.*/;
+                }
+            }, "stateSelect").startup();
+        });
+
+
+        </script>
+    </body>
+
+    </html>

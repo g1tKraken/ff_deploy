@@ -1,0 +1,72 @@
+2020-08-06 20:26:40,073 : 113 : INFO :  * Restarting with windowsapi reloader
+2020-08-06 20:26:40,882 : 113 : WARNING :  * Debugger is active!
+2020-08-06 20:26:40,892 : 113 : INFO :  * Debugger PIN: 111-470-564
+2020-08-06 20:26:40,909 : 113 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2020-08-06 20:27:23,109 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET / HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,157 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/css/style.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,467 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/tundra.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,595 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/dijit.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,788 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/icons/commonIcons.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,788 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/layout/ContentPane.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,788 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Common.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,789 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/layout/TabContainer.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,790 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/layout/AccordionContainer.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:23,913 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:23] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/layout/SplitContainer.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,106 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/layout/BorderContainer.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,107 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/form/Common.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,107 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/form/Button.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,108 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/form/Checkbox.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,108 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/form/RadioButton.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,230 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/form/Slider.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,423 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Tree.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,423 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/form/Select.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,423 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/ProgressBar.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,423 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/TitlePane.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,424 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Calendar.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,545 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/TimePicker.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,738 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Menu.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,738 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Toolbar.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,738 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Dialog.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,739 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Editor.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,740 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/icons/editorIcons.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:24,862 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:24] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/ColorPalette.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,055 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/tundra_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,056 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/config.js HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,056 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/fflogic.js HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,373 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/dijit_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,374 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/TimePicker_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,374 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Calendar_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,377 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Dialog_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,377 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Editor_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,377 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/icons/editorIcons_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,692 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Menu_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,692 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/Tree_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,693 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/ProgressBar_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,694 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/TitlePane_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,695 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/layout/TabContainer_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:25,696 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:25] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/form/Slider_rtl.css HTTP/1.1[0m" 200 -
+2020-08-06 20:27:26,032 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:26] "[37mGET /static/js/small_geonames_cat_pop-places.json HTTP/1.1[0m" 200 -
+2020-08-06 20:27:26,033 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:26] "[37mGET /static/js/states.json HTTP/1.1[0m" 200 -
+2020-08-06 20:27:26,033 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:26] "[37mGET /static/logos/Crumbs.png HTTP/1.1[0m" 200 -
+2020-08-06 20:27:26,376 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:26] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/validationInputBg.png HTTP/1.1[0m" 200 -
+2020-08-06 20:27:26,682 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:26] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/buttonEnabled.png HTTP/1.1[0m" 200 -
+2020-08-06 20:27:26,682 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:26] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/spriteArrows.png HTTP/1.1[0m" 200 -
+2020-08-06 20:27:27,008 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2020-08-06 20:27:36,510 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:36] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/buttonHover.png HTTP/1.1[0m" 200 -
+2020-08-06 20:27:48,766 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:48] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/tooltipConnectorRight.png HTTP/1.1[0m" 200 -
+2020-08-06 20:27:48,766 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:48] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/warning.png HTTP/1.1[0m" 200 -
+2020-08-06 20:27:48,767 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:48] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/popupMenuBg.gif HTTP/1.1[0m" 200 -
+2020-08-06 20:27:48,767 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:27:48] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/tooltipConnectorLeft.png HTTP/1.1[0m" 200 -
+2020-08-06 20:28:48,372 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:28:48] "[33mGET /djf HTTP/1.1[0m" 404 -
+2020-08-06 20:32:55,491 : 113 : INFO :  * Restarting with windowsapi reloader
+2020-08-06 20:32:56,267 : 113 : WARNING :  * Debugger is active!
+2020-08-06 20:32:56,277 : 113 : INFO :  * Debugger PIN: 111-470-564
+2020-08-06 20:32:56,294 : 113 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2020-08-06 20:33:02,278 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:33:02] "[37mGET / HTTP/1.1[0m" 200 -
+2020-08-06 20:33:12,071 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:33:12] "[37mGET /static/js/dojo-release-1.16.3-src/dijit/themes/tundra/images/buttonActive.png HTTP/1.1[0m" 200 -
+2020-08-06 20:34:52,435 : 113 : INFO : 127.0.0.1 - - [06/Aug/2020 20:34:52] "[37mGET /output-data HTTP/1.1[0m" 200 -
+2020-08-06 20:37:00,842 : 113 : INFO :  * Detected change in 'C:\\Users\\SeaLord\\anaconda37\\Lib\\site-packages\\typing_extensions.py', reloading
+2020-08-06 20:37:01,935 : 113 : INFO :  * Restarting with windowsapi reloader
+2020-08-06 20:37:02,718 : 113 : WARNING :  * Debugger is active!
+2020-08-06 20:37:02,728 : 113 : INFO :  * Debugger PIN: 111-470-564
+2020-08-06 20:37:02,754 : 113 : INFO :  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)

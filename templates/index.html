@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta SameSite="Lax">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Crumbs...</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <!-- Leaflet  -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+
+    <!--
+        < link rel="stylesheet" href="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/../dijit/themes/claro/claro.css') }}">
+    -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/../dijit/themes/tundra/tundra.css') }}">
+    
+    <!--link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dijit/themes/claro/claro.css"-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+
+    <script>dojoConfig = {async: true, parseOnLoad: true}</script>
+    <script src="//ajax.googleapis.com/ajax/libs/dojo/1.14.1/dojo/dojo.js" data-dojo-config="parseOnLoad: true, isDebug: true"></script>
+    <!-- script src="{{ url_for('static', filename='js/dojo-release-1.16.3-src/dojo/dojo.js') }}" data-dojo-config="parseOnLoad: true, isDebug: true"></script -->
+    <script>
+        require(["dojo/parser", "dojo/json", "dijit/form/TextBox"]);
+    </script>
+    <script>
+        var citiesJN = [];
+        var statesJN =[];
+
+       require([
+           "dojo/json", "dojo/store/Memory",
+           "dijit/form/ComboBox", "dijit/form/FilteringSelect",
+           "dojo/text!{{ url_for('static', filename='js/small_geonames_cat_pop-places.json') }}",
+           "dojo/text!{{ url_for('static', filename='js/states.json') }}",
+           "dojo/domReady!"
+       ], function(json ,Memory, ComboBox, FilteringSelect, locs, states){
+
+           citiesJN = json.parse(locs);
+           statesJN = json.parse(states);
+
+           new dijit.form.ComboBox({
+               id: "city",
+               store: new Memory({ data: citiesJN }),
+               autoComplete: true,
+               query: {state: /.*/},
+               style: "width: 250px;",
+               required: true,
+               searchAttr: "PLACE_NAME",
+               onChange: function(cityobj){
+                   console.log("combobox onchange ", cityobj, this.item);
+                   dijit.byId('state').set('value', this.item ? this.item.STATE_ALPHA : null);
+                   //L.map("map", { center: , zoom: 12});
+                   //myMap.setView([this.item.PRIM_LAT_DEC, this.item.PRIM_LONG_DEC], 14);
+                   var mypull = {};
+                      mypull.lat = this.item.PRIM_LAT_DEC
+                      mypull.lon = this.item.PRIM_LONG_DEC
+                      mypull.key = ['Brunch']
+                   pull_data(mypull);
+               }
+           }, "city").startup();
+
+           new dijit.form.FilteringSelect({
+               id: "state",
+               store: new Memory({ idProperty: "STATE_ALPHA", data: statesJN }),
+               autoComplete: true,
+               style: "width: 250px;",
+               onChange: function(state){
+                   console.log("FilteringSelect onchange ", state, this.item);
+                   dijit.byId('city').query.STATE_ALPHA = this.item.STATE_ALPHA || /.*/;
+               }
+           }, "state").startup();
+       });
+   </script>
+   <script>
+
+        function build_output() {
+        /* data route */
+        var url = "/output-data";
+        d3.json(url).then(function(response) {
+
+        console.log(response);
+
+        for (var i = 0; i < response.length; i++) {
+            var r = response[i];
+            var lat = r.geometry.location.lat
+            var lon = r.geometry.location.lng
+            var location = [lat, lon]
+        
+            var status = r.business_status;
+        
+            var name = r.name;
+            var google_rating = r.rating;
+            var yelp_stars = r.yelp_stars;
+            var zomato_stars = r.zomato_stars;
+            var OpeningHours = r.zomato_timings;
+            var zomato_avg_for_two = r.zomato_avg_for_two;
+            var michelin_stars = r.michelin_stars;
+            var keyword = r.keyword;
+            
+            console.log(`lat ${lat}`);
+            console.log(`lon ${lon}`);
+            console.log(`location ${location}`);
+            console.log(`status ${status}`);
+            console.log(`name ${name}`);
+            console.log(`google_rating ${google_rating}`);
+            console.log(`yelp_stars ${yelp_stars}`);
+            console.log(`zomato_stars ${zomato_stars}`);
+            console.log(`OpeningHours ${OpeningHours}`);
+            console.log(`zomato_avg_for_two ${zomato_avg_for_two}`);
+            console.log(`michelin_stars ${michelin_stars}`);
+            console.log(`keyword ${keyword}`);
+
+            var popuptxt = "<h1>" + r.name + "</h1> <hr>";
+                //popuptxt += " <h3>Population " + r.population;
+                popuptxt += "<h3>Opening Hours " + r.OpeningHours;
+                popuptxt += "<h3>Google Rating " + r.google_rating; 
+                popuptxt += "<h3>Yelp Rating " + r.yelp_stars;
+                popuptxt += "<h3>Zomato Rating " + r.zomato_stars;
+                popuptxt += "<h3>Average Price for two $" + r.zomato_avg_for_two; 
+                popuptxt += "<h3>Michelin Stars" + r.michelin_stars;
+                popuptxt += "</h3>";
+
+            L.marker(location)
+            .bindPopup(popuptxt)
+            .addTo(myMap);
+        }});
+        }
+
+
+
+
+        function build_foodie_index() {
+        /* data route */
+        var url = "/foodie-index";
+        d3.json(url).then(function(response) {
+
+        console.log(response);
+
+        var foodie_score = response.map(x => x.foodie_score);
+        var nightlife_score = response.map(x => x.nightlife_score);
+
+        console.log(foodie_score);
+        console.log(nightlife_score);
+        });
+        }
+
+       
+        var pull_data = function(obj){
+
+            var url = `/send?lat=${obj.lat}&lon=${obj.lon}&key=${obj.key}`;
+            var myreturn = d3.json(url);
+            //var myreturn = dojo.json.parse(url);
+            console.dir(`writing to mongo with ${obj} `);
+            //   var pullTime = Form.time.value;
+            build_output();
+            
+            //    build_foodie_index();
+            // //  d3.event.preventDefault();
+            myMap.setView([obj.lat, obj.lon], 14);
+        }
+   </script>
+</head>
+
+<body class="tundra">
+
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3> <img src="{{ url_for('static', filename='logos/Crumbs.png') }}" class="img-fluid" alt="Responsive image">
+                </h3>
+            </div>
+            <div class="form-group">
+                <label for="state">Where do you want to start?:</label>
+                <input type="location" class="form-control form-control-lg" id="state" placeholder="State?">
+                <input type="location" class="form-control form-control-lg" id="city" placeholder="Location?">
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">When?</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Breakfast/Brunch</a>
+                        </li>
+                        <li>
+                            <a href="#">Lunch</a>
+                        </li>
+                        <li>
+                            <a href="#">Dinner</a>
+                        </li>
+                             <a href="#">Drink</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Experience?</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">Fast Casual</a>
+                        </li>
+                        <li>
+                            <a href="#">Casual Dining</a>
+                        </li>
+                        <li>
+                            <a href="#">Fine Dining</a>
+                        </li>
+                        </li>
+                        <a href="#">Brewery/Vineyard</a>
+                        </li>
+                    </ul>
+                    <li>
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Restrictions?</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu2">
+                            <li>
+                                <a href="#">Kosher</a>
+                            </li>
+                            <li>
+                                <a href="#">Vegan</a>
+                            </li>
+                            <li>
+                                <a href="#">Paleo</a>
+                            </li>
+                        </ul>
+                </li>
+                
+                <li>
+                </li>
+                <div class="form-group">
+                    <label for="where"> </label>
+                    <input type="text" class="form-control form-control-lg"  id="FormControlInput2"
+                    data-dojo-type="dijit/form/TextBox"
+                    data-dojo-props="trim:true, propercase:true" placeholder="Destination?"/>
+                  </div>
+                <li>
+                    <a href="#">Start Over</a> <!-- This clears filter --> 
+                </li>
+            </ul>
+
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Menus</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <div id="map"></div>
+
+        </div>
+    </div>
+       <!-- config-->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/fflogic.js') }}"></script>
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <!-- Pull in function page-->
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='js/functions.js') }}"></script>
+    JS function 
+    <script type="text/javascript">
+
+    </script>-->
+</body>
+
+</html>
