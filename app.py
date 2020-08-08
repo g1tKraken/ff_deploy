@@ -95,5 +95,16 @@ def foodie_index():
   
     return foodie_index_results
 
+
+@app.route("/dj")
+def dj():
+    return render_template('dojomenu.html')
+
+
+@app.route("/djf")
+def djf():
+    return render_template('dojofilt.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
