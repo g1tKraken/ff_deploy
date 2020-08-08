@@ -30,7 +30,7 @@ logging.basicConfig(format='%(asctime)s : %(lineno)d : %(levelname)s : %(message
 config = configparser.ConfigParser()
 config.read('food_fighters_conf.txt')
 
-conn = config['mongo']['conn_string']
+conn = 'mongodb://ec2-18-224-51-189.us-east-2.compute.amazonaws.com:27017'
 client = pymongo.MongoClient(conn)
 db = client["food_fighters"]
 
@@ -44,7 +44,7 @@ def query_guide(lat='38.890762', lon='-77.084755:', radius='400'):
         auth_key = codecs.decode(config['michelin']['api_key'], 'rot-13')
         url = f"https://secure-apir.viamichelin.com/apir/2/findPoi.json2/RESTAURANT/eng?center={location}&nb=100&dist={radius}&source=RESGR&filter=AGG.provider%20eq%20RESGR&charset=UTF-8&ie=UTF-8&authKey={auth_key}"
         response = requests.get(url).json()["poiList"]
-        db.get_collection("michelin_guide").delete_many({}) # This needs to be moved into Flask to aggregate results
+        #db.get_collection("michelin_guide").delete_many({}) # This needs to be moved into Flask to aggregate results
         db.get_collection("michelin_guide").insert_many(response)
         logging.info("MongoDB Updated: Database - food_fighters, Collection - michelin_guide")
     except Exception as e:
@@ -68,10 +68,14 @@ def query_google(lat='38.890762', lon='-77.084755', radius='400', keywords=['cof
             "keyword": kw
         }
 
-        response = requests.get(base_url, params=params).json()
+        try:
+            response = requests.get(base_url, params=params).json()
+            key_results_list = response['results']
+        except Exception as e:
+            print(f'error in query_google {e}')
 
-        key_results_list = response['results']
-        print(key_results_list)
+        #passes to this point
+        print(f'query_google - key_results_list: {key_results_list}')
 
         if "next_page_token" in response:
             params = {
@@ -93,8 +97,9 @@ def query_google(lat='38.890762', lon='-77.084755', radius='400', keywords=['cof
 
         for kr in key_results_list:
             kr["keyword"] = kw
+            print(f'key results list length is: {len(kr)}')
 
-        db.get_collection("google_places").delete_many({}) # This needs to be moved into Flask to aggregate results
+        #db.get_collection("google_places").delete_many({}) # This needs to be moved into Flask to aggregate results
         db.get_collection("google_places").insert_many(key_results_list)
 
 
@@ -120,7 +125,7 @@ def query_yelp(lat='38.89076', lon='-77.084755', radius='400'):
             response = requests.get(base_url, headers=header, params=params).json()
             results = response['businesses']
 
-            db.get_collection("Yelp").delete_many({}) # This needs to be moved into Flask to aggregate results
+            #db.get_collection("Yelp").delete_many({}) # This needs to be moved into Flask to aggregate results
             db.get_collection("Yelp").insert_many(results)
             logging.info("MongoDB Updated: Database - {}, Collection - {}".format("food_fighters", "yelp"))
 
@@ -137,7 +142,7 @@ def query_zomato(lat='38.89076', lon='-77.084755', radius='400'):
     user_key = codecs.decode(config['zomato']['api_key'], 'rot-13')
     try:
         headers = {'Accept': 'application/json', 'user-key': user_key}
-        db.get_collection("zomato").delete_many({})  # This needs to be moved into Flask to aggregate results
+        #db.get_collection("zomato").delete_many({})  # This needs to be moved into Flask to aggregate results
         for docs in db.get_collection("google_places").find({}):
             search_url = "https://developers.zomato.com/api/v2.1/search?"
             search_response = requests.get(f'{search_url}lat={lat}&lon={lon}&radius={radius}&count=10&q={docs["name"]}', headers=headers)
@@ -164,7 +169,7 @@ def fetch_foodie_index(lat='38.89076', lon='-77.084755'):
                    'lon': lon,
                    'foodie_score': foodie_score,
                    'nightlife_score': nightlife_score}
-    db.get_collection("foodie_index").delete_many({})  # This needs to be moved into Flask to aggregate results
+    #db.get_collection("foodie_index").delete_many({})  # This needs to be moved into Flask to aggregate results
     db.get_collection("foodie_index").insert_one(loc_details)
     logging.info("MongoDB Updated: Database - food_fighters, Collection - foodie_score")
 
@@ -237,27 +242,27 @@ def develop_output():
         if docs not in output_array:
             output_array.append(docs)
 
-    db.get_collection("outputs").delete_many({})
+    #db.get_collection("outputs").delete_many({})
     db.get_collection("outputs").insert_many(output_array)
 
-query_google(lat='40.738541',
-             lon='-73.988505',
-             radius='400',
-             keywords=['fast casual'])
+# query_google(lat='40.738541',
+#              lon='-73.988505',
+#              radius='400',
+#              keywords=['fast casual'])
 
-query_guide(lat='40.738541',
-            lon='-73.988505',
-            radius="400")
-
-#query_yelp(lat='40.738541',
+# query_guide(lat='40.738541',
 #             lon='-73.988505',
-#             radius='400')
+#             radius="400")
 
-query_zomato(lat='40.738541',
-             lon='-73.988505',
-             radius='400')
+# #query_yelp(lat='40.738541',
+# #             lon='-73.988505',
+# #             radius='400')
 
-fetch_foodie_index(lat='40.738541',
-                   lon='-73.988505')
+# query_zomato(lat='40.738541',
+#              lon='-73.988505',
+#              radius='400')
 
-develop_output()
+# fetch_foodie_index(lat='40.738541',
+#                    lon='-73.988505')
+
+# develop_output()

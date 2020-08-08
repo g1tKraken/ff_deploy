@@ -18,7 +18,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   maxZoom: 18,
   zoomOffset: -1,
   id: "mapbox/light-v9",
-  accessToken: gapi
+  accessToken: "pk.eyJ1IjoiZGFydGFuaW9udyIsImEiOiJjam01OWhzOHQwbXl3M3BwOGxndWhvNzl2In0.EY46JTKac1w-i-OmHrVzcA"
 }).addTo(myMap);
 
 var cal_bearing = function (lt1,ln1,lt2,ln2) {
@@ -45,24 +45,36 @@ function placeMarker(iconLoc, imagePath){
   L.marker(iconLoc, {icon: x}).addTo(myMap);
 }
 
-myMap.on("contextmenu", function (event) {
-    //console.log(`map coordinates: ${event.latlng.toString()}`);
-    new_ll = event.latlng;
-    
+myMap.on("contextmenu", function(event) {
+  ll_split = event.latlng.toString().replace('LatLng(','').replace(')','').split(", ");
+  var mypinpull = {};
+  mypinpull.lat = ll_split[0],
+  mypinpull.lon = ll_split[1],
+  mypinpull.key = [dijit.byId('where').value]
+  //mypinpull.key = ['steak', 'pizza', 'coffee']
+  pull_data(mypinpull);
+//  checkmark(ll_split);
+});
+
+//console.log(`map coordinates: ${event.latlng.toString()}`);
+  
+  var checkmark = function (packet) {
+      console.log(`!!  checkmark coordinates: ${packet}`);
+     // new_ll = packet.latlng;
     //L.marker(new_ll).addTo(myMap);
 
     //console.log(`var new_ll validate as: ${typeof(new_ll)} :[${new_ll}]`);
-    ll_split = new_ll.toString().replace('LatLng(','').replace(')','').split(", ");
+    //ll_split = new_ll.toString().replace('LatLng(','').replace(')','').split(", ");
 
     //console.log(`center point coordinates: ${typeof(ll_split)} :[${ll_split}]`);
-    console.log(`center point coordinates: ${ll_split}`);
+    //console.log(`center point coordinates: ${ll_split}`);
     //my_bearing = cal_bearing(wh[0],wh[1], ll_split[0],ll_split[1]);
 
-    var hicoords = getpoint(ll_split[0],ll_split[1],dd,315);
+    var hicoords = getpoint(packet[0],packet[1],dd,315);
     //L.marker(hicoords).addTo(myMap);
     
-    var lowcoords = getpoint(ll_split[0],ll_split[1],dd,135);
-    console.log(`bounding box: ${hicoords} ${lowcoords}`)
+    var lowcoords = getpoint(packet[0],packet[1],dd,135);
+    //console.log(`bounding box: ${hicoords} ${lowcoords}`)
     //L.marker(lowcoords).addTo(myMap);
 
     L.polygon([
@@ -75,6 +87,24 @@ myMap.on("contextmenu", function (event) {
         fillColor: "#F84D4D",
         fillOpacity: 0.01
       }).addTo(myMap);
+
+ 
+      for(var key in markerdata){
+        if(markerdata.hasOwnProperty(key)){
+          //console.log(`checking marker [${markerdata[key].location}] for position`);
+          if((markerdata[key].lat <= hicoords[0]) && (markerdata[key].lat >= lowcoords[0]) && (markerdata[key].lon <= lowcoords[0]) && (markerdata[key].lon >= hicoords[1]))
+          {
+            console.log(`!!      Placing marker in range`);
+            L.marker(markerdata[key].location).bindPopup(markerdata[key].popuptxt).addTo(myMap);
+            delete markerdata[key];
+          }else
+          {
+            //console.log(`marker out of range`);
+          }
+        }
+      }
+    }
+      
 
     //console.log(`my bearing: ${my_bearing}`);
     //console.log(`starting: ${wh}`);
@@ -89,9 +119,7 @@ myMap.on("contextmenu", function (event) {
     
     //placeMarker([ll_split[0],ll_split[1]],"static/icons/restaurant-vegan.png");
     //.bindPopup("Original Marker");
-    
-
-  });
+ 
 
   //L.marker(wh).addTo(myMap);
 

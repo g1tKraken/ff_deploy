@@ -109,16 +109,15 @@
                 }, "where").startup();
 
         });
-
-        var markerdata = {};
-        var markercount = 0;
+   </script>
+   <script>
 
         function build_output() {
         /* data route */
         var url = "/output-data";
         d3.json(url).then(function(response) {
 
-        //console.log(response);
+        console.log(response);
 
         for (var i = 0; i < response.length; i++) {
             var r = response[i];
@@ -139,19 +138,19 @@
             var michelin_description = r.michelin_description
             var keyword = r.keyword;
             
-            //console.log(`lat ${lat}`);
-            //console.log(`lon ${lon}`);
-            console.log(`name ${name} | status ${status} | location ${location}`);
-            //console.log(`status ${status}`);
+            console.log(`lat ${lat}`);
+            console.log(`lon ${lon}`);
             console.log(`address ${address}`);
-            //console.log(`location ${location}`);
-            // console.log(`google_rating ${google_rating}`);
-            // console.log(`yelp_stars ${yelp_stars}`);
-            // console.log(`zomato_stars ${zomato_stars}`);
-            // console.log(`OpeningHours ${OpeningHours}`);
-            // console.log(`zomato_avg_for_two ${zomato_avg_for_two}`);
-            // console.log(`michelin_stars ${michelin_stars}`);
-            // console.log(`michelin_stars ${michelin_description}`);
+            console.log(`location ${location}`);
+            console.log(`status ${status}`);
+            console.log(`name ${name}`);
+            console.log(`google_rating ${google_rating}`);
+            console.log(`yelp_stars ${yelp_stars}`);
+            console.log(`zomato_stars ${zomato_stars}`);
+            console.log(`OpeningHours ${OpeningHours}`);
+            console.log(`zomato_avg_for_two ${zomato_avg_for_two}`);
+            console.log(`michelin_stars ${michelin_stars}`);
+            console.log(`michelin_stars ${michelin_description}`);
             console.log(`keyword ${keyword}`);
 
             //skip null values
@@ -191,16 +190,9 @@
                 popuptxt += michelin_stars_string;
                 popuptxt += "</h3>";
 
-            markerdata[markercount++] = {
-                'popuptxt' : popuptxt,
-                'location': location,
-                'lat' : location[0],
-                'lon' : location[1]
-            }
-
-            // L.marker(location)
-            // .bindPopup(popuptxt)
-            // .addTo(myMap);
+            L.marker(location)
+            .bindPopup(popuptxt)
+            .addTo(myMap);
         }});
         }
 
@@ -239,7 +231,6 @@
             //    build_foodie_index();
             // //  d3.event.preventDefault();
             myMap.setView([obj.lat, obj.lon], 14);
-            checkmark([obj.lat, obj.lon]);
         }
    </script>
 </head>

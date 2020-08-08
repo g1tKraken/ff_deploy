@@ -1,0 +1,10 @@
+[google]
+api_key = NVmnFlOh9mq_Y3v5dToIEjgpam639rBVCcmIiB4
+[michelin]
+api_key = ERFGTC20200801015629630606782809
+[yelp]
+api_key = _l0JY2zHpykueKOWJWtY_ugVdBFhmR1ehnAuId-aRsuQaOQQ5Psz_6XgMyOFaPQI6_k0m5bdoLkXzA6l04Xb1m71gF4cejgk_e24SqxOzSqVTZ8R-Rs1zYfoNYZtK3Lk
+[zomato]
+api_key = p0np6orr3n073rr23nq460472qo43qn6
+[mongo]
+conn_string = mongodb://ec2-18-224-51-189.us-east-2.compute.amazonaws.com:27017
