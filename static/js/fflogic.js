@@ -5,6 +5,7 @@ wh = [38.896059, -77.036679];
 start = [38.942707,-96.245576];
 
 dd = 0.333 //default distance ome mile
+gapi = ''
 
 var myMap = L.map("map", {
   center: start,
@@ -18,7 +19,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   maxZoom: 18,
   zoomOffset: -1,
   id: "mapbox/light-v9",
-  accessToken: "pk.eyJ1IjoiZGFydGFuaW9udyIsImEiOiJjam01OWhzOHQwbXl3M3BwOGxndWhvNzl2In0.EY46JTKac1w-i-OmHrVzcA"
+  accessToken: gapi
 }).addTo(myMap);
 
 var cal_bearing = function (lt1,ln1,lt2,ln2) {
